@@ -3,6 +3,7 @@ package com.censusanalyser;
 public class CensusAnalyserException extends Throwable {
     enum ExceptionType {
         CENSUS_FILE_PROBLEM
+
     }
 
     ExceptionType type;

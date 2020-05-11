@@ -29,4 +29,9 @@ public class CensusAnalyserTest {
             Assert.assertEquals(CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM, e.type);
         }
     }
+
+//    @Test
+//    public void givenIndianStateCsv_ShouldReturnExactCount() {
+//        CensusAnalyser censusAnalyser=new CensusAnalyser();
+//    }
 }
