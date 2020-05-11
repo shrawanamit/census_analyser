@@ -24,15 +24,31 @@ public class CensusAnalyser {
             Iterable<IndiaCensusCSV> csvIterable = () -> censusCSVIterator;
             int namOfEateries;
             namOfEateries = (int) StreamSupport.stream(csvIterable.spliterator(), false).count();
-//            while (censusCSVIterator.hasNext()) {
-//                namOfEateries++;
-//                IndiaCensusCSV censusData = censusCSVIterator.next();
-//            }
-
             return namOfEateries;
         } catch (IOException e) {
             throw new CensusAnalyserException(e.getMessage(),
                     CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM);
+//        } catch (IllegalStateException e) {
+//            throw new CensusAnalyserException(e.getMessage(),CensusAnalyserException.ExceptionType.UN)
+
+        }
+    }
+
+    public int loadIndianStateCode(String csvFilePath) throws CensusAnalyserException {
+        try {
+            Reader reader = Files.newBufferedReader(Paths.get(csvFilePath));
+            CsvToBeanBuilder<IndiaStateCodeCSV> csvToBeanBuilder = new CsvToBeanBuilder<>(reader);
+            csvToBeanBuilder.withType(IndiaStateCodeCSV.class);
+            csvToBeanBuilder.withIgnoreLeadingWhiteSpace(true);
+            CsvToBean<IndiaStateCodeCSV> csvToBean = csvToBeanBuilder.build();
+            Iterator<IndiaStateCodeCSV> stateCSVIterator = csvToBean.iterator();
+            Iterable<IndiaStateCodeCSV> csvIterable = () -> stateCSVIterator;
+            int namOfEateries;
+            namOfEateries = (int) StreamSupport.stream(csvIterable.spliterator(), false).count();
+            return namOfEateries;
+        } catch (IOException e) {
+            throw new CensusAnalyserException(e.getMessage(),
+                                            CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM);
 //        } catch (IllegalStateException e) {
 //            throw new CensusAnalyserException(e.getMessage(),CensusAnalyserException.ExceptionType.UN)
 
