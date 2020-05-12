@@ -19,10 +19,7 @@ public class CensusAnalyser {
         try(Reader reader = Files.newBufferedReader(Paths.get(csvFilePath))) {
 
             Iterator<IndiaCensusCSV> censusCSVIterator = this.getCSVFileIterator(reader,IndiaCensusCSV.class);
-            Iterable<IndiaCensusCSV> csvIterable = () -> censusCSVIterator;
-            int namOfEateries;
-            namOfEateries = (int) StreamSupport.stream(csvIterable.spliterator(), false).count();
-            return namOfEateries;
+           return getCount(censusCSVIterator);
         } catch (IOException e) {
             throw new CensusAnalyserException(e.getMessage(),
                     CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM);
@@ -30,13 +27,10 @@ public class CensusAnalyser {
     }
 
     public int loadIndianStateCode(String csvFilePath) throws CensusAnalyserException {
-        try (Reader reader = Files.newBufferedReader(Paths.get(csvFilePath))){
 
+        try (Reader reader = Files.newBufferedReader(Paths.get(csvFilePath))){
             Iterator<IndiaStateCodeCSV> stateCSVIterator = this.getCSVFileIterator(reader,IndiaStateCodeCSV.class);
-            Iterable<IndiaStateCodeCSV> csvIterable = () -> stateCSVIterator;
-            int namOfEateries;
-            namOfEateries = (int) StreamSupport.stream(csvIterable.spliterator(), false).count();
-            return namOfEateries;
+          return getCount(stateCSVIterator);
         } catch (IOException e) {
             throw new CensusAnalyserException(e.getMessage(),
                                             CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM);
@@ -45,6 +39,13 @@ public class CensusAnalyser {
 
 
         }
+    }
+    private  <E> int getCount(Iterator<E> iterator) {
+        Iterable<E> csvIterable = () -> iterator;
+        int namOfEateries;
+        namOfEateries = (int) StreamSupport.stream(csvIterable.spliterator(), false).count();
+        return namOfEateries;
+
     }
    private <E> Iterator<E> getCSVFileIterator(Reader reader, Class<E> csvClass) {
         CsvToBeanBuilder<E> csvToBeanBuilder = new CsvToBeanBuilder<>(reader);
