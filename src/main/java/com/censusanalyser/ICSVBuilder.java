@@ -11,5 +11,5 @@ public interface ICSVBuilder<E> {
 
    Iterator<E> getCSVFileIterator(Reader reader, Class csvClass)throws CSVBuilderException;
     List<E> getCSVFileList(Reader reader, Class csvClass)throws CSVBuilderException;
-    Map<E,E> getCSVFileMap(Reader reader, Class csvClass) throws CSVBuilderException;
+    //Map<E,E> getCSVFileMap(Reader reader, Class csvClass) throws CSVBuilderException;
 }

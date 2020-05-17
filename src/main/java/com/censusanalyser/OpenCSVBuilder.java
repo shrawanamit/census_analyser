@@ -24,10 +24,10 @@ public class OpenCSVBuilder<E> implements ICSVBuilder  {
 
     }
 
-    @Override
-    public Map<E,E> getCSVFileMap(Reader reader, Class csvClass) throws CSVBuilderException {
-        return (Map<E, E>) this.getCSVBean(reader,csvClass).parse();
-    }
+//    @Override
+//    public Map<E,E> getCSVFileMap(Reader reader, Class csvClass) throws CSVBuilderException {
+//        return (Map<E, E>) this.getCSVBean(reader,csvClass).parse();
+//    }
 
     private CsvToBean<E> getCSVBean(Reader reader, Class csvClass) throws CSVBuilderException {
         try{CsvToBeanBuilder<E> csvToBeanBuilder = new CsvToBeanBuilder<>(reader);
