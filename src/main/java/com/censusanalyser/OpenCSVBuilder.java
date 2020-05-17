@@ -6,6 +6,7 @@ import com.opencsv.bean.CsvToBeanBuilder;
 import java.io.Reader;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 public class OpenCSVBuilder<E> implements ICSVBuilder  {
 
@@ -21,6 +22,11 @@ public class OpenCSVBuilder<E> implements ICSVBuilder  {
 
 
 
+    }
+
+    @Override
+    public Map<E,E> getCSVFileMap(Reader reader, Class csvClass) throws CSVBuilderException {
+        return (Map<E, E>) this.getCSVBean(reader,csvClass).parse();
     }
 
     private CsvToBean<E> getCSVBean(Reader reader, Class csvClass) throws CSVBuilderException {
