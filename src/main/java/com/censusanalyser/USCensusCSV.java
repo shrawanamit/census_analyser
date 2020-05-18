@@ -27,6 +27,7 @@ public class USCensusCSV {
                 ", totalArea=" + totalArea +
                 ", populationDensity=" + populationDensity +
                 '}';
+
     }
 
 

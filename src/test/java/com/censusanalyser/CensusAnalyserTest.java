@@ -185,6 +185,45 @@ public class CensusAnalyserTest {
             Assert.assertEquals(51, numOfRecords);
         } catch (CensusAnalyserException e) { }
     }
+    @Test
+    public void givenUSCensusCsv_whenSortedOnPopulation_shouldReturnShortedResult() throws CensusAnalyserException {
+
+        try {
+            CensusAnalyser censusAnalyser = new CensusAnalyser(CensusAnalyser.Country.US);
+            censusAnalyser.loadCensusData(CensusAnalyser.Country.INDIA,US_CENSUS_CSV_FILE_PATH);
+            String sortedUSCsvData = censusAnalyser.getPopulationyWiseSortedUSCensusData();
+            USCensusCSV[] stateCSV = new Gson().fromJson(sortedUSCsvData, USCensusCSV[].class);
+            Assert.assertEquals(4779736,stateCSV[0].population);
+        } catch (CensusAnalyserException e) {
+            e.printStackTrace();
+        }
+    }
+    @Test
+    public void givenUSCensuseCsv_whenSortedOnArea_shouldReturnShortedResult() throws CensusAnalyserException {
+
+        try {
+            CensusAnalyser censusAnalyser = new CensusAnalyser(CensusAnalyser.Country.US);
+            censusAnalyser.loadCensusData(CensusAnalyser.Country.INDIA,US_CENSUS_CSV_FILE_PATH);
+            String sortedUSCsvData = censusAnalyser.getAreaWiseSortedUSCensusData();
+            USCensusCSV[] stateCSV = new Gson().fromJson(sortedUSCsvData,  USCensusCSV[].class);
+            Assert.assertEquals(294207.53,stateCSV[0].totalArea);
+        } catch (CensusAnalyserException e) {
+            e.printStackTrace();
+        }
+    }
+    @Test
+    public void givenUSCensusCsv_whenSortedOnPopulationDensity_shouldReturnShortedResult() throws CensusAnalyserException {
+
+        try {
+            CensusAnalyser censusAnalyser = new CensusAnalyser(CensusAnalyser.Country.US);
+            censusAnalyser.loadCensusData(CensusAnalyser.Country.INDIA,US_CENSUS_CSV_FILE_PATH);
+            String sortedUSCsvData = censusAnalyser.getPopulationDensityWiseSortedUSCensusData();
+            USCensusCSV[] stateCSV = new Gson().fromJson(sortedUSCsvData, USCensusCSV[].class);
+            Assert.assertEquals(21.74,stateCSV[0].populationDensity);
+        } catch (CensusAnalyserException e) {
+            e.printStackTrace();
+        }
+    }
 
 
 }

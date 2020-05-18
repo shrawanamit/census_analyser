@@ -9,6 +9,8 @@ public class CensusAnalyser {
         this.country=country;
     }
 
+
+
     public enum Country {INDIA,US}
     private final Country country;
     Map<String, CensusDAO> censusStateMap ;
@@ -42,6 +44,21 @@ public class CensusAnalyser {
 
     public String getAreaWiseSortedCensusData() throws CensusAnalyserException {
         Comparator<CensusDAO> censusComparator =Comparator.comparing(census -> census.areaInSqKm);
+        return sort(censusComparator);
+    }
+
+    public String getPopulationDensityWiseSortedUSCensusData() throws CensusAnalyserException {
+        Comparator<CensusDAO> censusComparator =Comparator.comparing(census -> census.densityPerSqKm);
+        return sort(censusComparator);
+    }
+
+    public String getAreaWiseSortedUSCensusData() throws CensusAnalyserException {
+        Comparator<CensusDAO> censusComparator =Comparator.comparing(census -> census.areaInSqKm);
+        return sort(censusComparator);
+    }
+
+    public String getPopulationyWiseSortedUSCensusData() throws CensusAnalyserException {
+        Comparator<CensusDAO> censusComparator =Comparator.comparing(census -> census.population);
         return sort(censusComparator);
     }
 
