@@ -28,4 +28,13 @@ public class USCensusCSV {
                 ", populationDensity=" + populationDensity +
                 '}';
     }
+
+
+    public USCensusCSV(String state, String stateCode, int population, double populationDensity, double areaInSqKm) {
+        this.state=state;
+        this.stateId=stateCode;
+        this.population=population;
+        this.populationDensity=populationDensity;
+        this.totalArea=areaInSqKm;
+    }
 }
